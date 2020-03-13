@@ -4,20 +4,26 @@ import pool from "../database";
 
 class GamesController {
     
-    public index(req: Request, res: Response){
-        pool.query('DESCRIBE games');
-        res.json( 'games');
+    public async getList(req: Request, res: Response){
+      const games = await pool.query('SELECT * FROM games');
+      res.json(games);
     }
 
-    public create(req: Request, res: Response){
-        res.json({text: 'Created game'});
-    }
-
-    public update(req:Request, res:Response){
+    public getOneGame(req:Request, res:Response){
         res.json({text: 'Updated game' + req.params.id});
     }
 
-    public delete(req:Request, res:Response){
+    public async createGame(req: Request, res: Response): Promise<void>{
+        await pool.query('INSERT INTO games set ?', [req.body])
+        res.json({text: 'Game saved'});
+    }
+
+
+    public updateGame(req:Request, res:Response){
+        res.json({text: 'Updated game' + req.params.id});
+    }
+
+    public deleteGame(req:Request, res:Response){
         res.json({text: 'Deleted game' + req.params.id});
     }
 }

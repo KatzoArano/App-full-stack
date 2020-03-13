@@ -10,10 +10,11 @@ class GamesRoutes {
     }
 
     config():void{
-        this.router.get('/', (gamesController.index),
-        this.router.post('/',(gamesController.create)),
-        this.router.put('/:id', (gamesController.update)),
-        this.router.delete('/:id', (gamesController.delete))
+        this.router.get('/', (gamesController.getList),
+        this.router.get('/:id', (gamesController.getOneGame)),
+        this.router.post('/',(gamesController.createGame)),
+        this.router.put('/:id', (gamesController.updateGame)),
+        this.router.delete('/:id', (gamesController.deleteGame))
         )
     }
 
