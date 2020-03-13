@@ -37,10 +37,17 @@ class GamesController {
         });
     }
     updateGame(req, res) {
-        res.json({ text: 'Updated game' + req.params.id });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('UPDATE games set WHERE id = ?', [req.body, id]);
+        });
     }
     deleteGame(req, res) {
-        res.json({ text: 'Deleted game' + req.params.id });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('DELETE FROM games WHERE id = ?', [id]);
+            res.json({ text: 'Deleted game' });
+        });
     }
 }
 const gamesController = new GamesController();

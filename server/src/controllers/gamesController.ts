@@ -24,12 +24,15 @@ class GamesController {
     }
 
 
-    public updateGame(req:Request, res:Response){
-        res.json({text: 'Updated game' + req.params.id});
+    public async updateGame(req:Request, res:Response){
+        const {id} = req.params;
+        await pool.query('UPDATE games set WHERE id = ?', [req.body, id])
     }
 
-    public deleteGame(req:Request, res:Response){
-        res.json({text: 'Deleted game' + req.params.id});
+    public async deleteGame(req:Request, res:Response){
+        const {id} = req.params;
+        await pool.query('DELETE FROM games WHERE id = ?', [id])
+        res.json({text: 'Deleted game'});
     }
 }
 
