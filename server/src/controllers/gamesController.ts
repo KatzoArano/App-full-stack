@@ -8,6 +8,18 @@ class GamesController {
         pool.query('DESCRIBE games');
         res.json( 'games');
     }
+
+    public create(req: Request, res: Response){
+        res.json({text: 'Created game'});
+    }
+
+    public update(req:Request, res:Response){
+        res.json({text: 'Updated game' + req.params.id});
+    }
+
+    public delete(req:Request, res:Response){
+        res.json({text: 'Deleted game' + req.params.id});
+    }
 }
 
 const gamesController = new GamesController();
